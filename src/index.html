@@ -14,12 +14,13 @@
       href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css"
       rel="stylesheet"
     />
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.10.2/dist/cdn.min.js" defer></script>
 
     <script>
       function scrollHandler() {
         const scroll = window.pageYOffset > 65;
         document.querySelectorAll("[data-scroll-toggle]").forEach((el) => {
-          el.classList.toggle("fixed", scroll);
+          el.classList.toggle("fixed sm:flex", scroll);
           el.classList.toggle("top-0", scroll);
           el.classList.toggle("block", !scroll);
           el.classList.toggle("bg-indigo-800", scroll);
@@ -37,138 +38,213 @@
       class="min-h-screen bg-cover bg-fixed"
       style="background-image: url('assets/background.jpg')"
     >
-      <nav
-        x-data="{ open: false }"
-        class="bg-indigo-600 border-b border-indigo-700 block w-screen text-white"
-        data-scroll-toggle
-      >
-        <!-- Primary Navigation Menu -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="flex justify-between h-16">
-            <div class="flex">
-              <!-- Logo -->
-              <div class="shrink-0 flex items-center">
-                <a href="#">
-                  <img
-                    src="assets/favicon.png"
-                    alt="Logo"
-                    class="block h-16 w-auto fill-current text-gray-800"
-                  />
-                </a>
-              </div>
+    <nav
+    x-data="{ open: false }"
+    class="bg-indigo-600 border-b border-indigo-700 flexd w-full text-white"
+    data-scroll-toggle
+  >
+    <!-- Primary Navigation Menu -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex">
+          <!-- Logo -->
+          <div class="shrink-0 flex items-center">
+            <a href="#">
+              <img
+                src="assets/favicon.png"
+                alt="Logo"
+                class="block h-16 w-auto fill-current text-gray-800"
+              />
+            </a>
+          </div>
+          <!-- Hamburger Button -->
+          <div class="flex items-center sm:hidden">
+            <button
+              class="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-gray-300 focus:outline-none focus:text-gray-300"
+              aria-expanded="false"
+              @click="open = !open"
+            >
+              <svg
+                class="h-6 w-6"
+                stroke="currentColor"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  :class="{ 'hidden': open, 'inline-flex': !open }"
+                  class="inline-flex"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16m-7 6h7"
+                />
+                <path
+                  :class="{ 'hidden': !open, 'inline-flex': open }"
+                  class="hidden"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+          <!-- Navigation Links -->
+          <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+            <a
+              href="#"
+              class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-white focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
+            >
+              Dashboard
+            </a>
+          </div>
+        </div>
 
-              <!-- Navigation Links -->
-              <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                <a
-                  href="#"
-                  class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-white focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
-                >
-                  Dashboard
-                </a>
-              </div>
-            </div>
+        <!-- Settings Dropdown -->
+        <div class="hidden sm:flex sm:items-center sm:ms-6">
+          <div class="relative">
+            <button
+              id="dropdownDefaultButton"
+              data-dropdown-toggle="dropdown"
+              class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
+              aria-hidden="true"
+            >
+              <div>Username</div>
 
-            <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
-              <div align="right" width="48" class="">
-                <button
-                  id="dropdownDefaultButton"
-                  data-dropdown-toggle="dropdown"
-                  class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
-                  aria-hidden="true"
+              <div class="ms-1">
+                <svg
+                  class="fill-current h-4 w-4"
                   xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 10 6"
+                  viewBox="0 0 20 20"
                 >
-                  <div>Username</div>
-
-                  <div class="ms-1">
-                    <svg
-                      class="fill-current h-4 w-4"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                </button>
-
-                <div
-                  id="dropdown"
-                  class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
-                >
-                  <ul
-                    class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                    aria-labelledby="dropdownDefaultButton"
-                  >
-                    <li>
-                      <a
-                        href="#"
-                        class="flex justify-between px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        <span>Profile</span>
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          stroke="#212b36"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          fill="none"
-                        >
-                          <circle cx="12" cy="8" r="5" />
-                          <path d="M3,21 h18 C 21,12 3,12 3,21" />
-                        </svg>
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        class="flex justify-between px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        <span>Sign Out</span>
-                        <svg
-                          fill="#000000"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 52 52"
-                          enable-background="new 0 0 52 52"
-                          xml:space="preserve"
-                        >
-                          <g>
-                            <path
-                              d="M21,48.5v-3c0-0.8-0.7-1.5-1.5-1.5h-10C8.7,44,8,43.3,8,42.5v-33C8,8.7,8.7,8,9.5,8h10
-                                           C20.3,8,21,7.3,21,6.5v-3C21,2.7,20.3,2,19.5,2H6C3.8,2,2,3.8,2,6v40c0,2.2,1.8,4,4,4h13.5C20.3,50,21,49.3,21,48.5z"
-                            />
-                            <path
-                              d="M49.6,27c0.6-0.6,0.6-1.5,0-2.1L36.1,11.4c-0.6-0.6-1.5-0.6-2.1,0l-2.1,2.1c-0.6,0.6-0.6,1.5,0,2.1l5.6,5.6
-                                           c0.6,0.6,0.2,1.7-0.7,1.7H15.5c-0.8,0-1.5,0.6-1.5,1.4v3c0,0.8,0.7,1.6,1.5,1.6h21.2c0.9,0,1.3,1.1,0.7,1.7l-5.6,5.6
-                                           c-0.6,0.6-0.6,1.5,0,2.1l2.1,2.1c0.6,0.6,1.5,0.6,2.1,0L49.6,27z"
-                            />
-                          </g>
-                        </svg>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
               </div>
+            </button>
+
+            <div
+              id="dropdown"
+              class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+            >
+              <ul
+                class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                aria-labelledby="dropdownDefaultButton"
+              >
+                <li>
+                  <a
+                    href="#"
+                    class="flex justify-between px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  >
+                    <span>Profile</span>
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      stroke="#212b36"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      fill="none"
+                    >
+                      <circle cx="12" cy="8" r="5" />
+                      <path d="M3,21 h18 C 21,12 3,12 3,21" />
+                    </svg>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="flex justify-between px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  >
+                    <span>Sign Out</span>
+                    <svg
+                      fill="#000000"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 52 52"
+                      enable-background="new 0 0 52 52"
+                      xml:space="preserve"
+                    >
+                      <g>
+                        <path
+                          d="M21,48.5v-3c0-0.8-0.7-1.5-1.5-1.5h-10C8.7,44,8,43.3,8,42.5v-33C8,8.7,8.7,8,9.5,8h10
+                                       C20.3,8,21,7.3,21,6.5v-3C21,2.7,20.3,2,19.5,2H6C3.8,2,2,3.8,2,6v40c0,2.2,1.8,4,4,4h13.5C20.3,50,21,49.3,21,48.5z"
+                        />
+                        <path
+                          d="M49.6,27c0.6-0.6,0.6-1.5,0-2.1L36.1,11.4c-0.6-0.6-1.5-0.6-2.1,0l-2.1,2.1c-0.6,0.6-0.6,1.5,0,2.1l5.6,5.6
+                                       c0.6,0.6,0.2,1.7-0.7,1.7H15.5c-0.8,0-1.5,0.6-1.5,1.4v3c0,0.8,0.7,1.6,1.5,1.6h21.2c0.9,0,1.3,1.1,0.7,1.7l-5.6,5.6
+                                       c-0.6,0.6-0.6,1.5,0,2.1l2.1,2.1c0.6,0.6,1.5,0.6,2.1,0L49.6,27z"
+                        />
+                      </g>
+                    </svg>
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
-      </nav>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div
+      :class="{ 'block': open, 'hidden': !open }"
+      class="hidden sm:hidden"
+    >
+      <div class="pt-2 pb-3 space-y-1">
+        <a
+          href="#"
+          class="block pl-3 pr-4 py-2 border-l-4 border-indigo-400 text-base font-medium text-white bg-indigo-600 focus:outline-none focus:text-gray-200 focus:bg-indigo-800 focus:border-indigo-700 transition duration-150 ease-in-out"
+        >
+          Dashboard
+        </a>
+      </div>
+      <!-- Responsive Settings Options -->
+      <div class="pt-4 pb-1 border-t border-indigo-700">
+        <div class="flex items-center px-4">
+          <div class="flex-shrink-0">
+            <img
+              class="h-10 w-10 rounded-full"
+              src="https://ui-avatars.com/api/?name=User+Name"
+              alt="User Name"
+            />
+          </div>
+          <div class="ms-3">
+            <div class="text-base font-medium text-white">Username</div>
+            <div class="text-sm font-medium text-gray-200">
+              username@example.com
+            </div>
+          </div>
+        </div>
+        <div class="mt-3 space-y-1">
+          <a
+            href="#"
+            class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-white hover:text-gray-200 hover:bg-indigo-700 hover:border-indigo-700 focus:outline-none focus:text-gray-200 focus:bg-indigo-700 focus:border-indigo-700 transition duration-150 ease-in-out"
+          >
+            Profile
+          </a>
+          <a
+            href="#"
+            class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-white hover:text-gray-200 hover:bg-indigo-700 hover:border-indigo-700 focus:outline-none focus:text-gray-200 focus:bg-indigo-700 focus:border-indigo-700 transition duration-150 ease-in-out"
+          >
+            Sign Out
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
       <div class="flex justify-center items-center p-7 rounded-lg mt-24 -mb-36">
         <div
         class="flex ease-in-out"
         data-scroll-toggle
         >
             <form action="search" >
-                <input placeholder="Cari destinasi impianmu..." type="text" name="destination" id="" class="border-gray-300 p-3 rounded-md w-96">
+                <input placeholder="Cari destinasi impianmu..." type="text" name="destination" id="" class="border-gray-300 p-3 rounded-md lg:w-96">
                 <button type="submit" class="rounded-md p-3 text-white w-32 bg-indigo-600">Cari</button>
             </form>
         </div>
